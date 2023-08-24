@@ -6,16 +6,20 @@ import {
   GeneratePassword,
   GenerateSalt,
 } from "../../utils/notifications";
+import { createAdminValidator } from "../../utils/utils";
 
 // Admin Signup
 export const createAdmin = async (req: Request, res: Response) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+    const { userName, password, email } = req.body;
 
-    const { username, password, email } = req.body;
+    const validationResult = createAdminValidator.validate(req.body);
+
+    if (validationResult.error) {
+      return res.status(400).json({
+        error: validationResult.error.details[0].message,
+      });
+    }
 
     const existingAdmin = await Admin.findOne({ email });
     if (existingAdmin) {
@@ -26,7 +30,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     const hashedPassword = await GeneratePassword(password, salt);
 
     const newAdmin: AdminDocument = new Admin({
-      username,
+      userName,
       password: hashedPassword,
       email,
       role: "admin",

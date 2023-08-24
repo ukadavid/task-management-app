@@ -5,7 +5,6 @@ export interface UserDocument extends Document {
   lastName: string;
   userName: string;
   employeeId: string;
-  phoneNumber: string;
   email: string;
   password: string;
   status: string;
@@ -19,7 +18,6 @@ const UserSchema: Schema = new Schema(
     lastName: { type: String, required: true },
     userName: { type: String, required: true, unique: true },
     employeeId: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
     email: {
       type: String,
       required: true,

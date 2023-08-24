@@ -1,24 +1,27 @@
 import Joi from "joi";
-import { body } from "express-validator";
 
-export const createAdminValidator = [
-  body("username").trim().notEmpty().withMessage("Username is required"),
-  body("password")
-    .trim()
-    .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters long"),
-  body("email")
-    .trim()
-    .isEmail()
-    .withMessage("Invalid email address")
-    .normalizeEmail(),
-];
+export const createAdminValidator = Joi.object({
+  userName: Joi.string().required(),
+  email: Joi.string().trim().lowercase().required(),
+  password: Joi.string()
+    .pattern(/^[a-zA-Z0-9]{6}$/)
+    .required()
+    .label("Password")
+    .messages({
+      "string.pattern.base": "Password must contain only alphabets and numbers",
+    }),
+  confirm_password: Joi.string()
+    .valid(Joi.ref("password"))
+    .required()
+    .label("Confirm password")
+    .messages({ "any.only": "Confirm password does not match" }),
+});
 
 export const createUserValidator = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   userName: Joi.string().required(),
-  phoneNumber: Joi.string().required().min(11),
+  employeeId: Joi.string().required(),
   email: Joi.string().trim().lowercase().required(),
   password: Joi.string()
     .pattern(/^[a-zA-Z0-9]{4,8}$/)
@@ -38,7 +41,7 @@ export const loginUserSchema = Joi.object().keys({
   email: Joi.string().trim().lowercase().required(),
   password: Joi.string()
     .min(5)
-    .regex(/^[a-zA-Z0-9]{5,15}$/)
+    .regex(/^[a-zA-Z0-9]{4,15}$/)
     .required(),
 });
 

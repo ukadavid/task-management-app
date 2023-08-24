@@ -12,7 +12,7 @@ import { loginAdmin } from "../../controller/adminController/adminLogin";
 
 const router = express.Router();
 
-router.post("/register", createAdminValidator, createAdmin);
+router.post("/register", createAdmin);
 router.post("/login", loginAdmin);
 
 // User Route

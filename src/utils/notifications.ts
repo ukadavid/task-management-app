@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { UserDocument } from "../model/users";
-import { port, server, username, password, jwtsecret } from "../config";
+import { port, server, user, password, jwtsecret } from "../config";
 import { AdminDocument } from "../model/admins";
 
 export const generateOtp = () => {
@@ -53,7 +53,6 @@ export const generateOtp = () => {
 interface UserOrAdminDocument {
   id: string;
   email: string;
-  // Add other common properties here
 }
 
 export const generateToken = (
@@ -111,21 +110,22 @@ export const sendVerificationOTP = async (email: string, otp: number) => {
     const transporter = nodemailer.createTransport({
       host: server,
       port: port,
+      secure: false,
       auth: {
-        user: username,
+        user: user,
         pass: password,
       },
     });
 
     const mailOptions = {
-      from: "Voyeja <voyejahq@gmail.com>",
+      from: "Tobechukwu <Ukadavid7@gmail.com>",
       to: email,
       subject: "Account Verification OTP",
       html: `
   <div style="max-width:700px; font-size:110%; border:10px solid #ddd; 
   padding:50px 20px; margin:auto; ">
   <h2 style="text-transform:uppercase; text-align:center; color:teal;">
-  Welcome to Voyeja
+  Welcome to MediGuard
   </h2>
   <p>Hi there, your otp is ${otp}, it will expire in 30mins</p>
   </div>
@@ -145,20 +145,20 @@ export const sendVerificationEmail = async (email: string) => {
       host: server,
       port: port,
       auth: {
-        user: username,
+        user: user,
         pass: password,
       },
     });
 
     const mailOptions = {
-      from: "Voyeja <Voyejahq@gmail.com>",
+      from: "Tobechukwu <Ukadavid7@gmail.com>",
       to: email,
       subject: "Account Verification Successful",
       html: `
         <div style="max-width:700px; font-size:110%; border:10px solid #ddd; padding:50px 20px; margin:auto;">
-          <h2 style="text-transform:uppercase; text-align:center; color:teal;">Welcome to Voyeja</h2>
+          <h2 style="text-transform:uppercase; text-align:center; color:teal;">Welcome to MediGuard</h2>
           <p>Your account has been verified and activated by the admin.</p>
-          <p>Thank you for joining Voyeja. You can now login to your account and access all the features.</p>
+          <p>Thank you for joining MediGuard. You can now login to your account and access all the features.</p>
         </div>
       `,
     };
@@ -176,13 +176,13 @@ export const sendPasswordResetOTP = async (email: string, otp: number) => {
       host: server,
       port: port,
       auth: {
-        user: username,
+        user: user,
         pass: password,
       },
     });
 
     const mailOptions = {
-      from: "Voyeja <Voyejahq@gmail.com>",
+      from: "Tobechukwu <ukadavid7@gmail.com>",
       to: email,
       subject: "Password Reset OTP",
       html: `
