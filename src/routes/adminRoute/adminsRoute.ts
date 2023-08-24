@@ -2,13 +2,12 @@ import express from "express";
 import { createAdminValidator } from "../../utils/utils";
 import {
   getAllUsers,
-  deleteUser,
   getUser,
 } from "../../controller/adminController/getAllUsers";
 import { getAllPatient } from "../../controller/adminController/getAllPatients";
-import { deletePatient } from "../../controller/adminController/deletePatient";
 import { createAdmin } from "../../controller/adminController/adminSignup";
 import { loginAdmin } from "../../controller/adminController/adminLogin";
+import { deleteUserOrPatient } from "../../controller/adminController/deleteUserOrPatient";
 
 const router = express.Router();
 
@@ -17,11 +16,10 @@ router.post("/login", loginAdmin);
 
 // User Route
 router.get("/getUsers", getAllUsers);
-router.delete("/:id", deleteUser);
 router.get("/getUser", getUser);
 
 //patient Route
 router.get("/getPatients", getAllPatient);
-router.delete("/:id", deletePatient);
+router.delete("delete/:id", deleteUserOrPatient);
 
 export default router;

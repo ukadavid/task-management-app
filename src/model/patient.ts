@@ -8,11 +8,13 @@ export interface PatientDocument extends Document {
   height: number;
   weight: number;
   bmiIndex: number;
+  role: string;
 }
 
 const patientSchema: Schema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
+  role: { type: String },
   dateOfBirth: { type: Date, required: true },
   gender: { type: String, enum: ["male", "female", "other"] },
   height: { type: Number },

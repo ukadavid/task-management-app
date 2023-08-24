@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const createAdminValidator = Joi.object({
-  userName: Joi.string().required(),
+  username: Joi.string().required(),
   email: Joi.string().trim().lowercase().required(),
   password: Joi.string()
     .pattern(/^[a-zA-Z0-9]{6}$/)

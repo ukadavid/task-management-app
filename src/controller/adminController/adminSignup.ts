@@ -11,7 +11,7 @@ import { createAdminValidator } from "../../utils/utils";
 // Admin Signup
 export const createAdmin = async (req: Request, res: Response) => {
   try {
-    const { userName, password, email } = req.body;
+    const { username, password, email } = req.body;
 
     const validationResult = createAdminValidator.validate(req.body);
 
@@ -30,7 +30,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     const hashedPassword = await GeneratePassword(password, salt);
 
     const newAdmin: AdminDocument = new Admin({
-      userName,
+      username,
       password: hashedPassword,
       email,
       role: "admin",
@@ -38,7 +38,7 @@ export const createAdmin = async (req: Request, res: Response) => {
 
     await newAdmin.save();
 
-    const token = await generateToken(email, res);
+    const token = generateToken(email, res);
 
     return res.status(201).json({
       message: "Admin created successfully",

@@ -55,6 +55,7 @@ export const createUser = async (req: Request, res: Response) => {
       otp,
       expiry,
       status: "pending",
+      role: "user",
     });
 
     return res.status(200).json({

@@ -8,6 +8,9 @@ import bcrypt from "bcryptjs";
 
 export const loginAdmin = async (req: Request, res: Response) => {
   try {
+    const { email, password } = req.body;
+    const trimmedEmail = email.trim();
+
     const validationResult = loginAdminSchema.validate(req.body, variables);
 
     if (validationResult.error) {
@@ -15,9 +18,6 @@ export const loginAdmin = async (req: Request, res: Response) => {
         .status(400)
         .json({ error: validationResult.error.details[0].message });
     }
-
-    const { email, password } = req.body;
-    const trimmedEmail = email.trim();
 
     const admin: AdminDocument | null = await Admin.findOne({
       email: trimmedEmail,
@@ -33,7 +33,7 @@ export const loginAdmin = async (req: Request, res: Response) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const token = await generateToken(admin, res);
+    const token = generateToken(admin, res);
 
     return res.status(200).json({ message: "Login successful", admin, token });
   } catch (err) {
