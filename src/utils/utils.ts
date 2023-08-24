@@ -40,7 +40,7 @@ export const createUserValidator = Joi.object({
 export const loginUserSchema = Joi.object().keys({
   email: Joi.string().trim().lowercase().required(),
   password: Joi.string()
-    .min(5)
+    .min(4)
     .regex(/^[a-zA-Z0-9]{4,15}$/)
     .required(),
 });
