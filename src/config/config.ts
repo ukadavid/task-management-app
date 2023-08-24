@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
+import { MONGODB_URI } from "./index";
 
-const MONGODB_URI =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://sabiflexhq:sabi123flex@cluster0.urqsyic.mongodb.net/sabiflexdb";
 const db = async (): Promise<void> => {
   try {
     await mongoose.connect(MONGODB_URI, {});
