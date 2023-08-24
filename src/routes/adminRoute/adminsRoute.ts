@@ -1,8 +1,4 @@
 import express from "express";
-import {
-  createAdmin,
-  loginAdmin,
-} from "../../controller/userController/userController";
 import { createAdminValidator } from "../../utils/utils";
 import {
   getAllUsers,
@@ -11,6 +7,8 @@ import {
 } from "../../controller/adminController/getAllUsers";
 import { getAllPatient } from "../../controller/adminController/getAllPatients";
 import { deletePatient } from "../../controller/adminController/deletePatient";
+import { createAdmin } from "../../controller/adminController/adminSignup";
+import { loginAdmin } from "../../controller/adminController/adminLogin";
 
 const router = express.Router();
 

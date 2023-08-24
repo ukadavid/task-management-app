@@ -1,11 +1,10 @@
 import express from "express";
 import {
-  createUser,
-  verifyUser,
   loginUser,
-} from "../../controller/userController/userController";
+} from "../../controller/userController/userLogin";
 import { updateUserProfile } from "../../controller/userController/userprofileUpdate";
-import { authenticateUser } from "../../middlewares/auth";
+import { createUser } from "../../controller/userController/userSignup";
+import { verifyUser } from "../../controller/userController/userVerification";
 
 const router = express.Router();
 
