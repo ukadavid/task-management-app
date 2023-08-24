@@ -1,6 +1,6 @@
 import express from "express";
-import { createPatient } from "../../controller/PatientController/createPatient";
-import { searchPatient } from "../../controller/PatientController/searchPatient";
+import { createPatient } from "../../controller/patientController/createPatient";
+import { searchPatient } from "../../controller/patientController/searchPatient";
 
 const router = express.Router();
 

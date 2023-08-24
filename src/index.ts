@@ -9,6 +9,7 @@ import adminRoutes from "./routes/adminRoute/adminsRoute";
 import userRoutes from "./routes/userRoute/userRoute";
 import taskRoute from "./routes/taskRoute/taskRoute";
 import patientRoute from "./routes/patientRoute/patientRoute";
+import logoutRoute from "./routes/logoutRoute/logoutRoute";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/task", taskRoute);
 app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
 app.use("/patient", patientRoute);
+app.use("/logout", logoutRoute);
 
 const port = 5000;
 

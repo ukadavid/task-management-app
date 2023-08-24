@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import User, { UserDocument } from "../model/users";
-import Admin, { AdminDocument } from "../model/admins";
+import User, { UserDocument } from "../../model/users";
+import Admin, { AdminDocument } from "../../model/admins";
 import { validationResult } from "express-validator";
 import {
   createUserValidator,
   createAdminValidator,
   loginAdminSchema,
-} from "../utils/utils";
+} from "../../utils/utils";
 import {
   generateOtp,
   generateToken,
@@ -14,8 +14,8 @@ import {
   GeneratePassword,
   GenerateSalt,
   sendVerificationEmail,
-} from "../utils/notifications";
-import { loginUserSchema, variables } from "../utils/utils";
+} from "../../utils/notifications";
+import { loginUserSchema, variables } from "../../utils/utils";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -223,18 +223,6 @@ export const loginAdmin = async (req: Request, res: Response) => {
     const token = await generateToken(admin, res);
 
     return res.status(200).json({ message: "Login successful", admin, token });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "Internal server error" });
-  }
-};
-
-// *********************************************************************** //
-// Logout
-export const logout = async (req: Request, res: Response) => {
-  try {
-    res.clearCookie("token");
-    return res.status(200).json({ message: "Logout successful" });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Internal server error" });

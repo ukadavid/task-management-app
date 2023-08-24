@@ -1,11 +1,11 @@
 import express from "express";
-import { createTask } from "../../controller/TaskController/createTask";
-import { updateTask } from "../../controller/TaskController/updateTask";
-import { deleteTask } from "../../controller/TaskController/deleteTask";
-import { markTask } from "../../controller/TaskController/markTask";
-import { assignTask } from "../../controller/TaskController/assignTask";
-import { searchTask } from "../../controller/TaskController/searchTask";
-import { sortTask } from "../../controller/TaskController/sortTask";
+import { createTask } from "../../controller/taskController/createTask";
+import { updateTask } from "../../controller/taskController/updateTask";
+import { deleteTask } from "../../controller/taskController/deleteTask";
+import { markTask } from "../../controller/taskController/markTask";
+import { assignTask } from "../../controller/taskController/assignTask";
+import { searchTask } from "../../controller/taskController/searchTask";
+import { sortTask } from "../../controller/taskController/sortTask";
 
 const router = express.Router();
 
