@@ -3,7 +3,6 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface PatientDocument extends Document {
   firstName: string;
   lastName: string;
-  dateOfBirth: Date;
   gender: string;
   height: number;
   weight: number;
@@ -15,7 +14,6 @@ const patientSchema: Schema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   role: { type: String },
-  dateOfBirth: { type: Date, required: true },
   gender: { type: String, enum: ["male", "female", "other"] },
   height: { type: Number },
   weight: { type: Number },
@@ -24,7 +22,7 @@ const patientSchema: Schema = new Schema({
 
 patientSchema.pre<PatientDocument>("save", function (next) {
   if (this.height && this.weight) {
-    const heightInMeters = this.height / 100;
+    const heightInMeters = this.height;
     this.bmiIndex = this.weight / (heightInMeters * heightInMeters);
   }
   next();

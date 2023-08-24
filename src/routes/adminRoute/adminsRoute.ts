@@ -7,7 +7,8 @@ import {
 import { getAllPatient } from "../../controller/adminController/getAllPatients";
 import { createAdmin } from "../../controller/adminController/adminSignup";
 import { loginAdmin } from "../../controller/adminController/adminLogin";
-import { deleteUserOrPatient } from "../../controller/adminController/deleteUserOrPatient";
+import { deletePatient } from "../../controller/adminController/deletePatient";
+import { deleteUser } from "../../controller/adminController/deleteUser";
 
 const router = express.Router();
 
@@ -16,10 +17,11 @@ router.post("/login", loginAdmin);
 
 // User Route
 router.get("/getUsers", getAllUsers);
-router.get("/getUser", getUser);
+router.get("/getUser/:id", getUser);
 
 //patient Route
 router.get("/getPatients", getAllPatient);
-router.delete("delete/:id", deleteUserOrPatient);
+router.delete("/deletePatient/:patientId", deletePatient);
+router.delete("/deleteUser/:id", deleteUser);
 
 export default router;

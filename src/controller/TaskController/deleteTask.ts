@@ -4,6 +4,7 @@ import Task, { TaskDocument } from "../../model/task";
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     const taskId = req.params.taskId;
+    console.log(taskId);
 
     const deletedTask: TaskDocument | null = await Task.findByIdAndDelete(
       taskId

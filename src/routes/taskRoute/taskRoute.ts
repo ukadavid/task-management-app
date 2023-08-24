@@ -13,7 +13,7 @@ router.post("/createTask", createTask);
 router.put("/:taskId", updateTask);
 router.put("/:taskId/assign", assignTask);
 router.patch("/:taskId", markTask);
-router.get("/readTask", searchTask);
+router.get("/searchTask", searchTask);
 router.get("/sortTask", sortTask);
 router.delete("/:taskId", deleteTask);
 
