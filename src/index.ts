@@ -5,10 +5,10 @@ import dotenv from "dotenv";
 dotenv.config();
 import db from "./config/config";
 
-import partnerRoutes from "./routes/partners";
-import adminRoutes from "./routes/admins";
-import userRoutes from "./routes/users";
-import createHotelRoutes from "./routes/hotel";
+import adminRoutes from "./routes/adminRoute/adminsRoute";
+import userRoutes from "./routes/userRoute/userRoute";
+import taskRoute from "./routes/taskRoute/taskRoute";
+import patientRoute from "./routes/patientRoute/patientRoute";
 
 const app = express();
 
@@ -22,10 +22,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(logger("dev"));
 
-app.use("/partner", partnerRoutes);
+app.use("/task", taskRoute);
 app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
-app.use("/hotel", createHotelRoutes);
+app.use("/patient", patientRoute);
 
 const port = 5000;
 

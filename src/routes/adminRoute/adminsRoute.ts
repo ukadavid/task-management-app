@@ -1,11 +1,11 @@
 import express from "express";
-import { createAdmin, loginAdmin } from "../controller/userController";
-import { createAdminValidator } from "../utils/utils";
+import { createAdmin, loginAdmin } from "../../controller/userController";
+import { createAdminValidator } from "../../utils/utils";
 import {
   getAllUsers,
   deleteUser,
   getUser,
-} from "../controller/adminController";
+} from "../../controller/adminController";
 
 const router = express.Router();
 

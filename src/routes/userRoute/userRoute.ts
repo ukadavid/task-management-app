@@ -4,9 +4,9 @@ import {
   verifyUser,
   loginUser,
   logout,
-} from "../controller/userController";
-import { updateUserProfile } from "../controller/userprofileUpdate";
-import { authenticateUser } from "../middlewares/auth";
+} from "../../controller/userController";
+import { updateUserProfile } from "../../controller/userprofileUpdate";
+import { authenticateUser } from "../../middlewares/auth";
 
 const router = express.Router();
 
