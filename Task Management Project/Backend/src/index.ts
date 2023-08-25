@@ -29,7 +29,7 @@ db()
 app.use(express.json());
 app.use(cookieParser());
 app.use(logger("dev"));
-app.use(cors("*"));
+app.use(cors(corsOptions));
 
 app.use("/task", taskRoute);
 app.use("/admin", adminRoutes);

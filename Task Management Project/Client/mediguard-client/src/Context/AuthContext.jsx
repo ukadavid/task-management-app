@@ -46,7 +46,7 @@ const DataProvider = ({children}) => {
       const OTPData = {
         otp: formData.otp
       }
-      const response =  await apiPost("/users/verify", OTPData)
+      const response =  await apiPost("/user/otpVerify", OTPData)
       const data = await response.data
       toast.success(data.Message)
  

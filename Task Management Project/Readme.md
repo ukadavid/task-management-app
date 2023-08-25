@@ -1,5 +1,3 @@
-Sure, I can help you get started with writing the documentation for the MediGuard backend. Here's a basic template that you can use and expand upon:
-
 # MediGuard Backend Documentation
 
 Welcome to the official documentation for the MediGuard backend. This documentation provides an overview of the backend functionalities, APIs, and important information about how the system works.
@@ -30,18 +28,15 @@ Welcome to the official documentation for the MediGuard backend. This documentat
    - User
    - Patient
    - Task
-   - ...
+   - Admin
 
 5. Middlewares
    - Authentication Middleware
    - Authorization Middleware
-   - Error Handling Middleware
-   - ...
 
 6. Utils
    - Notifications
    - Validators
-   - ...
 
 7. Error Codes and Responses
    - Common Error Codes
@@ -51,7 +46,6 @@ Welcome to the official documentation for the MediGuard backend. This documentat
    - Data Encryption
    - Authentication Best Practices
    - Authorization Best Practices
-   - ...
 
 9. Deployment
    - Hosting Environment
@@ -81,25 +75,30 @@ To install and set up the MediGuard backend, follow these steps:
 
 2. Install dependencies:
    ```
-   cd MediGuard-backend
-   npm install
+   cd Backend
+   yarn
    ```
 
-3. Configure environment variables by creating a `.env` file (refer to `.env.example` for required variables).
+3. Create the JavaScript build files by compiling the Typescript code:
+   ```
+   yarn compile
+   ```
+
+4. Configure environment variables by creating a `.env` file (refer to `.env.example` for required variables).
 
 ### Running the Backend
 
 To start the backend server, run:
 
 ```
-npm start
+yarn dev
 ```
 
 ## 3. API Documentation
 
 ### Authentication and Authorization
 
-All requests to the backend APIs require authentication using JSON Web Tokens (JWT). To obtain a JWT, users need to register or login.
+All requests to the backend APIs require authentication using JSON Web Tokens (JWT). To obtain a JWT, users need to register and get token for authentication.
 
 **Authentication Middleware:** Ensures that only authenticated users can access protected routes.
 
@@ -122,7 +121,6 @@ Request Body:
   "password": "securepassword",
   "firstName": "John",
   "lastName": "Doe",
-  ...
 }
 ```
 
