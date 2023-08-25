@@ -1,29 +1,29 @@
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, DocumentTextIcon, UserIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 
 const features = [
   {
     name: 'Task Management',
     description:
       'Assign tasks to yourself or other medical professionals for efficient patient care coordination.',
-    icon: CloudArrowUpIcon,
+    icon: DocumentTextIcon,
   },
   {
     name: 'Patient Information',
     description:
       'Access up-to-date patient profiles, medical history, and treatment plans to deliver personalized care.',
-    icon: LockClosedIcon,
+    icon: UserIcon,
   },
   {
     name: 'Appointment Management',
     description:
       'Manage appointments, set reminders, and maintain a smooth scheduling process.',
-    icon: ArrowPathIcon,
+    icon: CalendarIcon,
   },
   {
     name: 'Secure Communication',
     description:
       'Communicate securely with patients, caregivers, and colleagues to ensure seamless collaboration.',
-    icon: FingerPrintIcon,
+    icon:  LockClosedIcon,
   },
 ]
 
