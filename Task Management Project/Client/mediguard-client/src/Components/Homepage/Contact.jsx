@@ -18,7 +18,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
         />
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contact Us</h2>
+      <h2 className="text-base font-semibold leading-7 text-indigo-600">Contact Us</h2>
         <p className="mt-2 text-lg leading-8 text-gray-600">
         We provide an all-encompassing platform that bridges the gap between patients, healthcare providers, and caregivers. Through advanced technology and user-friendly interfaces,
         </p>
