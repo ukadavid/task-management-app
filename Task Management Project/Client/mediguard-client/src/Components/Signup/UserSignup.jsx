@@ -1,5 +1,64 @@
+import { useAuth } from '../../Context/AuthContext';
+import { useState } from 'react'
 
 function SignUp() {
+
+  const {registerConfig} = useAuth();
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [userName, setUserName] = useState('')
+  const [confirm_password, setConfirmPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [employeeId, setEmployeeId] = useState('')
+
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value)
+  }
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value)
+  }
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value)
+  }
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+  
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };  
+
+  
+  const handleEmployeeIdChange = (e) => {
+    setEmployeeId(e.target.value)
+  }
+
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      firstName,
+      lastName,
+      email,
+      password,
+      employeeId,
+      userName,
+      confirm_password
+    }
+
+    registerConfig(formData)
+   
+  }
 
     return (
       <>
@@ -11,7 +70,7 @@ function SignUp() {
           </div>
   
           <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   First Name
@@ -23,6 +82,7 @@ function SignUp() {
                     type="text"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleFirstNameChange}
                   />
                 </div>
                 </div>
@@ -37,6 +97,7 @@ function SignUp() {
                     type="text"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleLastNameChange}
                   />
                   </div>
                 </div>
@@ -51,6 +112,7 @@ function SignUp() {
                     type="text"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleUserNameChange}
                   />
                 </div>
                 </div>
@@ -66,6 +128,7 @@ function SignUp() {
                     autoComplete="email"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleEmailChange}
                   />
                 </div>
                 </div>
@@ -80,6 +143,7 @@ function SignUp() {
                     type="text"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleEmployeeIdChange}
                   />
                 </div>
               </div>
@@ -99,6 +163,8 @@ function SignUp() {
                     autoComplete="current-password"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleConfirmPasswordChange}
+                    
                   />
                 </div>
                 </div>
@@ -114,6 +180,7 @@ function SignUp() {
                     autoComplete="current-password"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handlePasswordChange}
                   />
                 </div>
               </div>

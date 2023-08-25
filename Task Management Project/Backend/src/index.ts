@@ -1,8 +1,10 @@
 import express from "express";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
+
 import db from "./config/config";
 
 import adminRoutes from "./routes/adminRoute/adminsRoute";
@@ -13,6 +15,11 @@ import logoutRoute from "./routes/logoutRoute/logoutRoute";
 
 const app = express();
 
+const corsOptions = {
+  origin: "http://localhost:5173", // Only allow requests from this URL
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+};
+
 db()
   .then(() => {})
   .catch((err) => {
@@ -22,6 +29,7 @@ db()
 app.use(express.json());
 app.use(cookieParser());
 app.use(logger("dev"));
+app.use(cors("*"));
 
 app.use("/task", taskRoute);
 app.use("/admin", adminRoutes);
