@@ -1,8 +1,8 @@
 import { useState } from "react";
-import UserTable from "../Components/Dashboard/TaskTable";
-import FileUpload from "../Components/Dashboard/CreatePatient";
+import UserTable from "../Components/Dashboard/UserTable";
+import PatientTable from "../Components/Dashboard/PatientTable";
 
-function UserDashboard() {
+function AdminDashboard() {
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showUserTable, setShowUserTable] = useState(true);
   // Define state to manage the active link
@@ -171,11 +171,19 @@ function UserDashboard() {
             <div className="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
               <div className="flex w-full items-center">
                 <div className="flex items-center text-3xl text-gray-900 dark:text-white">
-                  Welcome User
+                  Welcome Admin
                 </div>
                 <div className="ml-auto sm:flex hidden items-center justify-end">
                   <div className="flex flex-row">
                     <div className="text-right">
+                    <div className="text-right mx-3">
+                      <div className="text-xs text-gray-400 dark:text-gray-400">
+                        Total Users:
+                      </div>
+                      <div className="text-gray-900 text-lg dark:text-white">
+                        50
+                      </div>
+                    </div>
                     </div>
                     <div className="text-right mx-3">
                       <div className="text-xs text-gray-400 dark:text-gray-400">
@@ -225,7 +233,7 @@ function UserDashboard() {
                   }`}
                   onClick={handleUploadClick}
                 >
-                  Manage Task
+                  User
                 </a>
               </div>
             </div>
@@ -239,4 +247,4 @@ function UserDashboard() {
   );
 }
 
-export default UserDashboard;
+export default AdminDashboard;

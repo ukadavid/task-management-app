@@ -7,7 +7,8 @@ import AdminSignupPage from './Pages/Signup/AdminSignupPage'
 import LoginPage from './Pages/LoginPage'
 import AccountVerificationPage from './Pages/AccountVerificationPage'
 import SuccessPage from './Pages/SuccessPage'
-import AdminDashboard from './Pages/UserDashboard'
+import UserDashboard from './Pages/UserDashboard'
+import AdminDashboard from './Pages/AdminDashboard'
 
 function App() {
 
@@ -23,7 +24,8 @@ function App() {
         <Route path="/verify" element={<AccountVerificationPage />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/verifyPassword" element={<SuccessPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/adminDashboard" element={<AdminDashboard />} />
+        <Route path="/userDashboard" element={<UserDashboard />} />
         </Routes>
       </Router>
     </>

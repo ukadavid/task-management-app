@@ -1,6 +1,8 @@
 import { useState } from "react";
-import UserTable from "../Components/Dashboard/TaskTable";
-import FileUpload from "../Components/Dashboard/CreatePatient";
+import CreatePatient from "../Components/Dashboard/CreatePatient";
+import TaskTable from "../Components/Dashboard/TaskTable";
+
+
 
 function UserDashboard() {
   const [showFileUpload, setShowFileUpload] = useState(false);
@@ -230,8 +232,8 @@ function UserDashboard() {
               </div>
             </div>
             {/* Here is the toggle */}
-            {showFileUpload && <FileUpload />}
-            {showUserTable && <UserTable />}
+            {showFileUpload && <CreatePatient />}
+            {showUserTable && <TaskTable />}
           </div>
         </div>
       </div>
