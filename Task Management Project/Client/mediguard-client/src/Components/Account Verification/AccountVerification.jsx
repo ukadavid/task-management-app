@@ -1,9 +1,15 @@
 import { useState, useRef } from "react";
+import { useLocation } from 'react-router-dom';
+import { useAuth } from "../../Context/AuthContext";
 
 const AccountVerification = () => {
+  const { OTPConfig } = useAuth();
   const [otp, setOtp] = useState(Array(6).fill(""));
   const inputRefs = useRef([]);
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userId = queryParams.get('userId');
+  
   const handleChange = (e, index) => {
     const newOtp = [...otp];
     newOtp[index] = e.target.value;
@@ -16,6 +22,12 @@ const AccountVerification = () => {
     }
   };
 
+  const handleVerification = async () => {
+    const enteredOTP = parseInt(otp.join(""));
+    console.log(enteredOTP);
+    OTPConfig(enteredOTP, userId);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full sm:max-w-sm">
@@ -25,7 +37,7 @@ const AccountVerification = () => {
           your account.
         </p>
         <div className="flex justify-center space-x-2">
-          {otp.map((digit, index) => (
+        {otp.map((digit, index) => (
             <input
               key={index}
               type="text"
@@ -47,6 +59,7 @@ const AccountVerification = () => {
           <button
             type="submit"
             className="block w-full bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-offset-2"
+            onClick={handleVerification}
           >
             Verify
           </button>

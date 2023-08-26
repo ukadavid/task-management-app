@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 
 import { toast } from "react-toastify";
-import { apiPost } from "../Api/Axios";
+import { apiPost } from "./Api/Axios";
 import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -25,10 +25,15 @@ const DataProvider = ({ children }) => {
 
       const response = await apiPost("/user/register", registerData);
       const data = await response.data;
+      console.log(data);
       toast.success(data.message);
 
       setTimeout(() => {
-        window.location.href = "/otpVerify";
+        const userId = data.user._id;
+        console.log(userId);
+        window.location.href = `/otpVerify?userId=${userId}`;
+     
+  
       }, 2000);
     } catch (error) {
       toast.error(error.response.data.error);
@@ -46,6 +51,10 @@ const DataProvider = ({ children }) => {
 
       const response = await apiPost("/admin/register", adminSignupData);
       const data = await response.data;
+      console.log(data.token);
+      if (data.message === "Admin created successfully") {
+        localStorage.setItem("token", data.token);
+      }
       toast.success(data.message);
 
       setTimeout(() => {
@@ -82,20 +91,54 @@ const DataProvider = ({ children }) => {
     }
   };
 
+    /**=================User Login =================================== */
+    const userLoginConfig = async (formData) => {
+      try {
+        const userLoginData = {
+          email: formData.email,
+          password: formData.password,
+        };
+  
+        const response = await apiPost("/user/login", userLoginData);
+        const data = await response.data;
+        if (data.message === "Login successful") {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userid", JSON.stringify(data.user._id));
+        }
+        console.log(data.token);
+        console.log(data.user._id);
+        
+        toast.success(data.message);
+  
+        setTimeout(() => {
+          window.location.href = "/userDashboard";
+        }, 2000);
+      } catch (error) {
+        toast.error(error.response.data.error);
+      }
+    };
   /* ==================================== Verify Email with OTP ================================================*/
-  const OTPConfig = async (formData) => {
+  const OTPConfig = async (enteredOTP, userId) => {
     try {
       const OTPData = {
-        otp: formData.otp,
+        otp: enteredOTP,
       };
-      const response = await apiPost("/user/otpVerify", OTPData);
+      
+      const response = await apiPost(`/user/verify/${userId}`, OTPData);
+      console.log(OTPData);
+      console.log(OTPData.otp);
       const data = await response.data;
-      toast.success(data.Message);
+      if (data.message === "User verified successfully, proceed to Login") {
+        localStorage.setItem("role", JSON.stringify(data.user.role));
+        console.log(data.user.role);
+      }
+      toast.success(data.message);
 
       setTimeout(() => {
         window.location.href = "/login";
       }, 2000);
     } catch (error) {
+      console.error(error);
       toast.error(error.response.data.error);
     }
   };
@@ -107,6 +150,7 @@ const DataProvider = ({ children }) => {
         OTPConfig,
         adminRegisterConfig,
         adminLoginConfig,
+        userLoginConfig
       }}
     >
       {children}

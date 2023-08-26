@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { apiDelete, apiGet } from "../Context/Api/Axios"
+import { apiDelete, apiGet } from "../../Context/Api/Axios"
 import swal from "sweetalert"
 import {toast} from 'react-toastify'
 

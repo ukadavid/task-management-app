@@ -1,38 +1,44 @@
-import { useState } from "react";
+import  { useEffect, useState } from "react";
 import UserTable from "../Components/Dashboard/UserTable";
 import PatientTable from "../Components/Dashboard/PatientTable";
+import { getUsers, getPatients } from "../Context/apiFunction"; 
 
 function AdminDashboard() {
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showUserTable, setShowUserTable] = useState(true);
-  // Define state to manage the active link
   const [activeLink, setActiveLink] = useState("Patients");
 
-  // Function to handle click event for Patients
+  const [lengthOfUser, setTotalUsers] = useState(0);
+  const [lengthOfPatient, setTotalPatients] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      const usersData = await getUsers();
+      setTotalUsers(usersData.length);
+
+      const patientsData = await getPatients();
+      setTotalPatients(patientsData.length);
+    }
+
+    fetchData();
+  }, []);
+
+
+
+
+  // Toggle content based on active link
   const handlePatientsClick = () => {
-    // Update the state to show UserTable and hide FileUpload
     setShowFileUpload(false);
     setShowUserTable(true);
-    // Update the active link
     setActiveLink("Patients");
   };
 
-  // Function to handle click event for Upload Hotel
   const handleUploadClick = () => {
-    // Update the state to show FileUpload and hide UserTable
     setShowFileUpload(true);
     setShowUserTable(false);
-    // Update the active link
     setActiveLink("Upload Hotel");
   };
-  // Function to handle click event for Upload Hotel
-  // const handleUserClick = () => {
-  //   // Update the state to show FileUpload and hide UserTable
-  //   setShowFileUpload(false);
-  //   setShowUserTable(false);
-  //   // Update the active link
-  //   setActiveLink("User Hotel");
-  // };
+
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
@@ -91,7 +97,7 @@ function AdminDashboard() {
           </div>
           <div className="ml-auto flex items-center space-x-7">
             <a
-              href="/Userlogin"
+              href="/login"
               className="inline-flex items-center justify-center h-8 px-4 py-2 text-base font-medium leading-6 rounded-md shadow text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out"
             >
               Logout
@@ -181,7 +187,7 @@ function AdminDashboard() {
                         Total Users:
                       </div>
                       <div className="text-gray-900 text-lg dark:text-white">
-                        50
+                        {lengthOfUser}
                       </div>
                     </div>
                     </div>
@@ -190,7 +196,7 @@ function AdminDashboard() {
                         Total Patients:
                       </div>
                       <div className="text-gray-900 text-lg dark:text-white">
-                        100
+                        {lengthOfPatient}
                       </div>
                     </div>
                   </div>

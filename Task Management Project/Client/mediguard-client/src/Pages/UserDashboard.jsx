@@ -5,7 +5,6 @@ import CreateTask from "../Components/Dashboard/CreateTask";
 import PatientTable from "../Components/Dashboard/PatientTable";
 
 
-// localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTk1MzAyMGU3YzFjYzM1ZmNhN2M5OCIsImVtYWlsIjoiandzdmVuQGdtYWlsLmNvbSIsImlhdCI6MTY5MzAxMjg4OSwiZXhwIjoxNjk1NjA0ODg5fQ.m3Gt8js2I7EqsBUXHfuUvA0rYsQH4RoXiQq7ygc_lC0")
 console.log(localStorage.getItem("token"))
 function UserDashboard() {
   const [showFileUpload, setShowFileUpload] = useState(false);
@@ -55,6 +54,12 @@ function UserDashboard() {
     setShowPatientTable(true)
     // Update the active link
    
+  };
+
+  const handleLogout = () => {
+    // Clear the authentication token from local storage
+    localStorage.removeItem("role");
+    window.location.href = "/login";
   };
 
   return (
@@ -114,7 +119,7 @@ function UserDashboard() {
           </div>
           <div className="ml-auto flex items-center space-x-7">
             <a
-              href="/Userlogin"
+             onClick={handleLogout}
               className="inline-flex items-center justify-center h-8 px-4 py-2 text-base font-medium leading-6 rounded-md shadow text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out"
             >
               Logout

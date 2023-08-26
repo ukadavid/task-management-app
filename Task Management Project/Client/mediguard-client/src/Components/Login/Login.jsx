@@ -1,7 +1,7 @@
 import { useAuth } from "../../Context/AuthContext";
 import { useState } from "react";
 function Login() {
-  const { adminLoginConfig } = useAuth();
+  const { adminLoginConfig, userLoginConfig } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,7 +19,14 @@ function Login() {
       email,
       password,
     };
-    adminLoginConfig(formData);
+    const role = localStorage.getItem('role')
+    console.log(role);
+    if (!role) {
+      adminLoginConfig(formData);
+    } else {
+      userLoginConfig(formData);
+    }
+   
   };
   return (
     <>

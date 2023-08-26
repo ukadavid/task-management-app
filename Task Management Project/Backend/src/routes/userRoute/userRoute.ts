@@ -11,9 +11,9 @@ const router = express.Router();
 
 router.post("/register", createUser);
 
-router.post("/verify/:id", verifyUser);
+router.post("/verify/:userId", verifyUser);
 
-router.post("/login", authenticateUser, loginUser);
+router.post("/login", loginUser);
 
 router.put("/update/:userId", authenticateUser, updateUserProfile);
 

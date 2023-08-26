@@ -4,10 +4,12 @@ import User from "../../model/users";
 // User Verification
 export const verifyUser = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { userId } = req.params;
     const { otp } = req.body;
+    console.log(otp);
 
-    const user = await User.findById(id);
+    const user = await User.findById(userId);
+    console.log(user);
 
     if (!user) {
       return res.status(400).json({
@@ -15,7 +17,10 @@ export const verifyUser = async (req: Request, res: Response) => {
       });
     }
 
-    if (user.otp !== otp) {
+    console.log(typeof user.otp, typeof otp);
+    console.log(user.otp, otp);
+
+    if (user.otp != otp) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
 
@@ -30,7 +35,7 @@ export const verifyUser = async (req: Request, res: Response) => {
 
     return res
       .status(200)
-      .json({ message: "User verified successfully, proceed to Login" });
+      .json({ message: "User verified successfully, proceed to Login", user });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Internal server error" });

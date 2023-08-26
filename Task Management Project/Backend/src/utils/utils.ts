@@ -4,7 +4,7 @@ export const createAdminValidator = Joi.object({
   username: Joi.string().required(),
   email: Joi.string().trim().lowercase().required(),
   password: Joi.string()
-    .pattern(/^[a-zA-Z0-9]{6}$/)
+    .pattern(/^[a-zA-Z0-9]{4}$/)
     .required()
     .label("Password")
     .messages({
@@ -42,7 +42,7 @@ export const loginUserSchema = Joi.object().keys({
 
 export const loginAdminSchema = Joi.object({
   email: Joi.string().trim().required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(4).required(),
 });
 
 export const variables = {
