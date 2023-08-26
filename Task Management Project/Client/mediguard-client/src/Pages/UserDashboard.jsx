@@ -46,13 +46,14 @@ function UserDashboard() {
     setActiveLink("task");
   };
  // Function to handle click event for Upload Hotel
-  const habdleShowPashient = () => {
+  const habdleShowPatient = () => {
     // Update the state to show FileUpload and hide UserTable
     setShowFileUpload(false);
     setShowUserTable(false);
     setShowTaskTable(false)
     setShowPatientTable(true)
     // Update the active link
+    setActiveLink("patient");
    
   };
 
@@ -248,11 +249,11 @@ function UserDashboard() {
                 <a
                   href="#"
                   className={`px-3 border-b-2 border-transparent pb-1.5 dark:text-gray-400 ${
-                    activeLink === "Patients"
+                    activeLink === "patient"
                       ? "dark:border-white dark:text-white"
                       : "no-underline"
                   }`}
-                  onClick={habdleShowPashient}
+                  onClick={habdleShowPatient}
                 >
                   View Patient
                 </a>
