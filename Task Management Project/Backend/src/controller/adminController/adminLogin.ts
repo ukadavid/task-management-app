@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Admin, { AdminDocument } from "../../model/admins";
 
 import { loginAdminSchema } from "../../utils/utils";
-import { generateToken } from "../../utils/notifications";
+import { generateTokenAdmin } from "../../utils/notifications";
 import { variables } from "../../utils/utils";
 import bcrypt from "bcryptjs";
 
@@ -33,7 +33,7 @@ export const loginAdmin = async (req: Request, res: Response) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const token = generateToken(admin, res);
+    const token = generateTokenAdmin(admin, res); // Use generateTokenAdmin
 
     return res.status(200).json({ message: "Login successful", admin, token });
   } catch (err) {

@@ -9,11 +9,12 @@ import { createAdmin } from "../../controller/adminController/adminSignup";
 import { loginAdmin } from "../../controller/adminController/adminLogin";
 import { deletePatient } from "../../controller/adminController/deletePatient";
 import { deleteUser } from "../../controller/adminController/deleteUser";
+import { authenticateAdmin } from "../../middlewares/adminAuth";
 
 const router = express.Router();
 
 router.post("/register", createAdmin);
-router.post("/login", loginAdmin);
+router.post("/login", authenticateAdmin, loginAdmin);
 
 // User Route
 router.get("/getUsers", getAllUsers);
@@ -21,7 +22,7 @@ router.get("/getUser/:id", getUser);
 
 //patient Route
 router.get("/getPatients", getAllPatient);
-router.delete("/deletePatient/:patientId", deletePatient);
-router.delete("/deleteUser/:id", deleteUser);
+router.delete("/deletePatient/:patientId", authenticateAdmin, deletePatient);
+router.delete("/deleteUser/:id", authenticateAdmin, deleteUser);
 
 export default router;

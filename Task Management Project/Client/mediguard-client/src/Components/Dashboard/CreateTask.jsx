@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import swal from 'sweetalert'
 
 const CreateTask = () => {
   const [title, setTitle] = useState("");
@@ -17,28 +18,35 @@ const CreateTask = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/admin/createHotel",
+        "http://localhost:5000/task/createTask",
         {
           title,
           description,
           patientName,
           dueDate,
     
-        }
+        },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+       
       );
 
-      if (response.status === 200) {
-        alert("Hotel created successfully!");
+      if (response.status === 201) {
+        swal("ALERT","Task created successfully!","success");
         setTitle("");
         setDescription("");
         setPatientName("");
         setDueDate("");
       } else {
-        alert(`Failed to create hotel. Error: ${response.data.message}`);
+        swal("ALERT",`Failed to create Task. Error: ${response.data.message}`,"error");
       }
+      console.error(response.data);
+      console.error(response.status);
     } catch (error) {
       console.error(error);
-      alert("Failed to create hotel. Please try again.");
+      swal("ALERT",error.response.data,"error");
     }
   };
 
@@ -47,7 +55,7 @@ const CreateTask = () => {
       <div className="sm:max-w-lg w-full p-5 bg-white rounded-xl z-10 border-2 border-gray-400">
         <div className="text-center">
           <h2 className="mt-5 text-3xl font-bold text-gray-900">
-            Create a Patient
+            Create Task
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
@@ -87,13 +95,13 @@ const CreateTask = () => {
               Patient Name
               </label>
               <input
-                id="description"
-                name="description"
+                id="patientName"
+                name="patientName"
                 type="text"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Patient Name"
-                value={description}
+                value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
               />
             </div>
@@ -102,13 +110,13 @@ const CreateTask = () => {
                 Due Date
               </label>
               <input
-                id="price"
-                name="price"
-                type="number"
+                id="dueDate"
+                name="dueDate"
+                type="date"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Due Date"
-                value={patientName}
+                value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
               />
             </div>
@@ -123,8 +131,7 @@ const CreateTask = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Price"
-                value={patientName}
-                onChange={(e) => setDueDate(e.target.value)}
+                
               />
             </div>
           </div>

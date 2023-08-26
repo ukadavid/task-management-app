@@ -77,6 +77,26 @@ export const generateToken = (
   }
 };
 
+export const generateTokenAdmin = (admin: AdminDocument, res: Response) => {
+  const payload = {
+    id: admin.id,
+    email: admin.email,
+    role: "admin", // Set the role to "admin"
+  };
+
+  try {
+    const token = jwt.sign(payload, jwtsecret, { expiresIn: "30d" });
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+    return token;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error generating token");
+  }
+};
+
 export const validateToken = (
   user: UserDocument | AdminDocument,
   token: string

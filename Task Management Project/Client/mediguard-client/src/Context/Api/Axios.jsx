@@ -48,12 +48,14 @@ export const apiPatch = (path, data) => {
 }
 
 // Delete Request
-export const apiDelete = (path, data) => {
+// Delete Request
+
+export const apiDelete = (path, id) => {
     const config = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }
 
-    return axios.delete(`${baseUrl}${path}`, { ...config, data })
+    return axios.delete(`${baseUrl}${path}/${id}`, config);
 }

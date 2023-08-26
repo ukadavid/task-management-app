@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import Admin, { AdminDocument } from "../../model/admins";
 import { validationResult } from "express-validator";
 import {
-  generateToken,
   GeneratePassword,
   GenerateSalt,
+  generateTokenAdmin,
 } from "../../utils/notifications";
 import { createAdminValidator } from "../../utils/utils";
 
@@ -38,7 +38,7 @@ export const createAdmin = async (req: Request, res: Response) => {
 
     await newAdmin.save();
 
-    const token = generateToken(email, res);
+    const token = generateTokenAdmin(email, res);
 
     return res.status(201).json({
       message: "Admin created successfully",

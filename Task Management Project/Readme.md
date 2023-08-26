@@ -527,7 +527,7 @@ Response:
 ```
 #### Task Creation
 
-Endpoint: `GET /api/patient/searchPatient`
+Endpoint: `POST /api/task/createTask`
 
 Description: Allows the users to create task.
 
@@ -535,25 +535,244 @@ Request Body:
 ```json
 
 {
-       "firstName": "Yemi"
+  "title": "Panadol Administration",
+  "description": "Administer the medication to the patient.",
+  "patientName": "Alfred John",
+  "dueDate": "2022-08-30T12:00:00Z"
 }
 
 ```
 
 Response:
 ```json
+
+{
+    "title": "Panadol Administration",
+    "description": "Administer the medication to the patient.",
+    "patientName": "Alfred John",
+    "dueDate": "2022-08-30T12:00:00.000Z",
+    "completed": false,
+    "_id": "64e7bdb1e6a131a22f3aff21",
+    "__v": 0
+}
+
+```
+#### Task Update
+
+Endpoint: `POST /api/task/:id/assign`
+
+Description: Allows the users to create task.
+
+Request Body:
+```json
+
+{
+  "title": "Medication Administration",
+  "description": "Administer prescribed medication to the patient.",
+  "patientName": "John Doe",
+  "dueDate": "2023-08-30T12:00:00Z",
+  "assignedTo": "64e76e394404ee7e4ef4c2bb",
+  "completed" : false
+}
+
+
+```
+
+Response:
+```json
+
+{
+    "_id": "64e7b942b91c0217a465dbb0",
+    "title": "Medication Administration",
+    "description": "Administer prescribed medication to the patient.",
+    "patientName": "John Doe",
+    "dueDate": "2023-08-30T12:00:00.000Z",
+    "completed": false,
+    "__v": 0,
+    "assignedTo": "64e76a364b04fbd483c767e0"
+}
+
+```
+#### Task Assign
+
+Endpoint: `PUT /api/task/:id`
+
+Description: Allows the users to assign task to another user.
+
+Request Body:
+```json
+
+{
+    "assignedTo": "64e76a364b04fbd483c767e0"
+}
+
+
+
+```
+
+Response:
+```json
+
+{
+    "_id": "64e7b942b91c0217a465dbb0",
+    "title": "Medication Administration",
+    "description": "Administer prescribed medication to the patient.",
+    "patientName": "John Doe",
+    "dueDate": "2023-08-30T12:00:00.000Z",
+    "completed": true,
+    "__v": 0,
+    "assignedTo": "64e76a364b04fbd483c767e0"
+}
+#### Change Task to Completed
+
+Endpoint: `PUT /api/task/:id`
+
+Description: Allows the users to assign task to another user.
+
+Request Body:
+```json
+
+{
+        "completed": true
+}
+
+
+
+```
+
+Response:
+```json
+
+{
+    "_id": "64e7b942b91c0217a465dbb0",
+    "title": "Medication Administration",
+    "description": "Administer prescribed medication to the patient.",
+    "patientName": "John Doe",
+    "dueDate": "2023-08-30T12:00:00.000Z",
+    "completed": true,
+    "__v": 0,
+    "assignedTo": "64e76a364b04fbd483c767e0"
+}
+
+```
+#### Task Search
+
+Endpoint: `GET /api/task/searchTask`
+
+Description: Allows the users to search for task using priority, duedate and assignedTo.
+
+Request Body:
+```json
+
+{
+"assignedTo":"64e76a364b04fbd483c767e0"
+}
+
+
+
+```
+
+Response:
+```json
+
 [
     {
-        "_id": "64e76e394404ee7e4ef4c2bb",
-        "firstName": "Yemi",
-        "lastName": "Paul",
-        "gender": "male",
-        "height": 1.98,
-        "weight": 80,
-        "bmiIndex": 204060.81012141623,
+        "_id": "64e7b942b91c0217a465dbb0",
+        "title": "Medication Administration",
+        "description": "Administer prescribed medication to the patient.",
+        "patientName": "John Doe",
+        "dueDate": "2023-08-30T12:00:00.000Z",
+        "completed": true,
+        "__v": 0,
+        "assignedTo": {
+            "_id": "64e76a364b04fbd483c767e0"
+        }
+    },
+
+]
+
+```
+#### Task Sort
+
+Endpoint: `GET /api/task/sortTask`
+
+Description: Allows the users to sort task using priority, duedate and assignedTo.
+
+Request Body:
+```json
+
+{
+"assignedTo":"64e76a364b04fbd483c767e0"
+}
+
+
+
+```
+
+Response:
+```json
+
+[
+   [
+    {
+        "_id": "64e7b942b91c0217a465dbb0",
+        "title": "Medication Administration",
+        "description": "Administer prescribed medication to the patient.",
+        "patientName": "John Doe",
+        "dueDate": "2023-08-30T12:00:00.000Z",
+        "completed": true,
+        "__v": 0,
+        "assignedTo": {
+            "_id": "64e76a364b04fbd483c767e0"
+        }
+    },
+    {
+        "_id": "64e7bc66b91c0217a465dbb7",
+        "title": "Paracetamol Administration",
+        "description": "Administer prescribed medication to the patient.",
+        "patientName": "Peter Paul",
+        "dueDate": "2023-08-30T12:00:00.000Z",
+        "completed": false,
+        "__v": 0
+    },
+    {
+        "_id": "64e7bdb1e6a131a22f3aff21",
+        "title": "Panadol Administration",
+        "description": "Administer the medication to the patient.",
+        "patientName": "Alfred John",
+        "dueDate": "2022-08-30T12:00:00.000Z",
+        "completed": false,
         "__v": 0
     }
 ]
+
+]
+
+```
+#### Task Delete
+
+Endpoint: `Delete /api/task/:id`
+
+Description: Allows the users to delete task .
+
+Request Body:
+```json
+
+{
+
+}
+
+
+
+```
+
+Response:
+```json
+
+{
+    "message": "Task deleted successfully"
+}
+
 ```
 
 ## 4. Models
@@ -563,11 +782,28 @@ The backend uses various models to structure and store data. Refer to the docume
 ### User Model
 
 ```json
+
 {
   "email": "user@example.com",
   "password": "hashed-password",
   "firstName": "John",
   "lastName": "Doe",
+    "employeeId": "string",
+  "status": "string",
+  "otp": 12222,
+  "expiry": "Date"
+  ...
+}
+```
+### Admin Model
+
+```json
+{
+  "email": "user@example.com",
+  "password": "hashed-password",
+  "firstName": "John",
+  "lastName": "Doe",
+  "lastLogin": "Date"
   ...
 }
 ```
@@ -578,13 +814,22 @@ The backend uses various models to structure and store data. Refer to the docume
 {
   "name": "Patient Name",
   "gender": "Male",
-  "age": 35,
+  "height": 2.4,
+  "weight": 77,
+  "bmiIndex": 20.555,
   ...
+}
+```
+### Task Model
+
+```json
+{
+  "title": "Panadol Administration",
+  "description": "Administer the medication to the patient.",
+  "patientName": "Alfred John",
+  "dueDate": "2022-08-30T12:00:00Z"
 }
 ```
 
 ## ...
 
-Continue the documentation by filling in details for other sections, expanding the API documentation, providing usage examples, and addressing common issues.
-
-Remember that this is just a template. You should tailor the documentation to your specific backend's functionalities, requirements, and best practices.

@@ -1,51 +1,58 @@
-import { useState } from "react";
-import axios from "axios";
+import  { useState } from "react";
+import {apiPost } from "../Context/Api/Axios"
+import swal from "sweetalert";
+
+
+const genderOptions = ["male", "female"];
 
 const CreatePatient = () => {
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
+  const [patientData, setPatientData] = useState({
+    firstName: "",
+    lastName: "",
+    gender: "",
+    height: "",
+    weight: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPatientData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    if (!name || !location || !description || !price || !image) {
-      alert("Please fill in all the fields.");
-      return;
-    }
+    console.log(patientData)
 
     try {
-      const response = await axios.post(
-        "http://localhost:3005/admin/createHotel",
-        {
-          name,
-          location,
-          description,
-          price,
-          image,
-        }
-      );
+      const response = await apiPost("/patient/createPatient", patientData);
 
-      if (response.status === 200) {
-        alert("Hotel created successfully!");
-        setName("");
-        setLocation("");
-        setDescription("");
-        setPrice("");
-        setImage("");
+      if (response.status === 201) {
+        swal("ALERT","Patient created successfully!","success");
+        clearInputs();
       } else {
-        alert(`Failed to create hotel. Error: ${response.data.message}`);
+        alert(`Failed to create patient. Error: ${response.data.message}`);
       }
     } catch (error) {
       console.error(error);
-      alert("Failed to create hotel. Please try again.");
+      swal("ALERT",error.response.data.message,"error");
     }
   };
 
+  const clearInputs = () => {
+    setPatientData({
+      firstName: "",
+      lastName: "",
+      gender: "",
+      height: "",
+      weight: "",
+    });
+  };
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-white py-6 px-4 sm:px-6 lg:px-8 ">
+    <div className="relative min-h-screen flex items-center justify-center bg-white py-6 px-4 sm:px-6 lg:px-8">
       <div className="sm:max-w-lg w-full p-5 bg-white rounded-xl z-10 border-2 border-gray-400">
         <div className="text-center">
           <h2 className="mt-5 text-3xl font-bold text-gray-900">
@@ -54,81 +61,60 @@ const CreatePatient = () => {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="name" className="sr-only">
-                First Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Hotel Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="location" className="sr-only">
-                Last Name
-              </label>
-              <input
-                id="location"
-                name="location"
-                type="text"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500"
-                placeholder="Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="description" className="sr-only">
-              Gender
-              </label>
-              <input
-                id="description"
-                name="description"
-                type="text"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="price" className="sr-only">
-                Height
-              </label>
-              <input
-                id="price"
-                name="price"
-                type="number"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="price" className="sr-only">
-                Weight
-              </label>
-              <input
-                id="price"
-                name="price"
-                type="number"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+
+              placeholder="First Name"
+              value={patientData.firstName}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+
+              placeholder="Last Name"
+              value={patientData.lastName}
+              onChange={handleInputChange}
+              required
+            />
+            <select
+              id="gender"
+              name="gender"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-black focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              value={patientData.gender}
+              onChange={handleInputChange}
+            >
+              <option>Choose Gender</option>
+              {genderOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <input
+              id="height"
+              name="height"
+              type="number"
+              placeholder="Height"
+              value={patientData.height}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              id="weight"
+              name="weight"
+              type="number"
+              placeholder="Weight"
+              value={patientData.weight}
+              onChange={handleInputChange}
+              required
+            />
           </div>
           <div>
             <button

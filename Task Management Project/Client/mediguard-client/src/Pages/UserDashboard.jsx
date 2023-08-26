@@ -2,12 +2,15 @@ import { useState } from "react";
 import CreatePatient from "../Components/Dashboard/CreatePatient";
 import TaskTable from "../Components/Dashboard/TaskTable";
 import CreateTask from "../Components/Dashboard/CreateTask";
+import PatientTable from "../Components/Dashboard/PatientTable";
 
 
-
+// localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTk1MzAyMGU3YzFjYzM1ZmNhN2M5OCIsImVtYWlsIjoiandzdmVuQGdtYWlsLmNvbSIsImlhdCI6MTY5MzAxMjg4OSwiZXhwIjoxNjk1NjA0ODg5fQ.m3Gt8js2I7EqsBUXHfuUvA0rYsQH4RoXiQq7ygc_lC0")
+console.log(localStorage.getItem("token"))
 function UserDashboard() {
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showUserTable, setShowUserTable] = useState(true);
+  const [showPatientTable,setShowPatientTable] = useState(true)
   const [showTaskTable, setShowTaskTable] = useState(true);
   // Define state to manage the active link
   const [activeLink, setActiveLink] = useState("Patients");
@@ -18,6 +21,7 @@ function UserDashboard() {
     setShowFileUpload(false);
     setShowUserTable(true);
     setShowTaskTable(false)
+    setShowPatientTable(false)
     // Update the active link
     setActiveLink("Patients");
   };
@@ -28,6 +32,7 @@ function UserDashboard() {
     setShowFileUpload(true);
     setShowUserTable(false);
     setShowTaskTable(false)
+    setShowPatientTable(false)
     // Update the active link
     setActiveLink("Upload Hotel");
   };
@@ -38,16 +43,19 @@ function UserDashboard() {
     setShowUserTable(false);
     setShowTaskTable(true)
     // Update the active link
+    setShowPatientTable(false)
     setActiveLink("task");
   };
-  // Function to handle click event for Upload Hotel
-  // const handleUserClick = () => {
-  //   // Update the state to show FileUpload and hide UserTable
-  //   setShowFileUpload(false);
-  //   setShowUserTable(false);
-  //   // Update the active link
-  //   setActiveLink("User Hotel");
-  // };
+ // Function to handle click event for Upload Hotel
+  const habdleShowPashient = () => {
+    // Update the state to show FileUpload and hide UserTable
+    setShowFileUpload(false);
+    setShowUserTable(false);
+    setShowTaskTable(false)
+    setShowPatientTable(true)
+    // Update the active link
+   
+  };
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
@@ -220,7 +228,7 @@ function UserDashboard() {
                 </div>
               </div>
               <div className="flex items-center space-x-3 sm:mt-7 mt-4">
-                <a
+              <a
                   href="#"
                   className={`px-3 border-b-2 border-transparent pb-1.5 dark:text-gray-400 ${
                     activeLink === "Patients"
@@ -229,7 +237,19 @@ function UserDashboard() {
                   }`}
                   onClick={handlePatientsClick}
                 >
-                  Register Patients
+                  View Task
+                </a>
+
+                <a
+                  href="#"
+                  className={`px-3 border-b-2 border-transparent pb-1.5 dark:text-gray-400 ${
+                    activeLink === "Patients"
+                      ? "dark:border-white dark:text-white"
+                      : "no-underline"
+                  }`}
+                  onClick={habdleShowPashient}
+                >
+                  View Patient
                 </a>
                 <a
                   href="#"
@@ -251,7 +271,7 @@ function UserDashboard() {
                   }`}
                   onClick={handleUploadClick}
                 >
-                  Manage Task
+                  Create Partner
                 </a>
               </div>
             </div>
@@ -259,6 +279,7 @@ function UserDashboard() {
             {showFileUpload && <CreatePatient />}
             {showTaskTable && <CreateTask />}
             {showUserTable && <TaskTable />}
+            {showPatientTable && <PatientTable />}
           </div>
         </div>
       </div>
