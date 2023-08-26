@@ -46,7 +46,7 @@ function UserDashboard() {
     setActiveLink("task");
   };
  // Function to handle click event for Upload Hotel
-  const habdleShowPatient = () => {
+  const handleShowPatient = () => {
     // Update the state to show FileUpload and hide UserTable
     setShowFileUpload(false);
     setShowUserTable(false);
@@ -253,7 +253,7 @@ function UserDashboard() {
                       ? "dark:border-white dark:text-white"
                       : "no-underline"
                   }`}
-                  onClick={habdleShowPatient}
+                  onClick={handleShowPatient}
                 >
                   View Patient
                 </a>
@@ -277,7 +277,7 @@ function UserDashboard() {
                   }`}
                   onClick={handleUploadClick}
                 >
-                  Create Partner
+                  Create Patient
                 </a>
               </div>
             </div>
