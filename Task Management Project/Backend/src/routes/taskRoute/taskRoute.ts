@@ -6,6 +6,7 @@ import { markTask } from "../../controller/taskController/markTask";
 import { assignTask } from "../../controller/taskController/assignTask";
 import { searchTask } from "../../controller/taskController/searchTask";
 import { sortTask } from "../../controller/taskController/sortTask";
+import { getAllTasks } from "../../controller/taskController/getAllTask";
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.put("/:taskId", updateTask);
 router.put("/:taskId/assign", assignTask);
 router.patch("/:taskId", markTask);
 router.get("/searchTask", searchTask);
+router.get("/getTask", getAllTasks);
 router.get("/sortTask", sortTask);
 router.delete("/:taskId", deleteTask);
 

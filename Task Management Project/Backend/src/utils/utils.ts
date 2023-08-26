@@ -10,11 +10,6 @@ export const createAdminValidator = Joi.object({
     .messages({
       "string.pattern.base": "Password must contain only alphabets and numbers",
     }),
-  confirm_password: Joi.string()
-    .valid(Joi.ref("password"))
-    .required()
-    .label("Confirm password")
-    .messages({ "any.only": "Confirm password does not match" }),
 });
 
 export const createUserValidator = Joi.object({
