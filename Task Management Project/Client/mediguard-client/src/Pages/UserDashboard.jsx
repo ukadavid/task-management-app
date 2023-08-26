@@ -1,12 +1,14 @@
 import { useState } from "react";
 import CreatePatient from "../Components/Dashboard/CreatePatient";
 import TaskTable from "../Components/Dashboard/TaskTable";
+import CreateTask from "../Components/Dashboard/CreateTask";
 
 
 
 function UserDashboard() {
   const [showFileUpload, setShowFileUpload] = useState(false);
   const [showUserTable, setShowUserTable] = useState(true);
+  const [showTaskTable, setShowTaskTable] = useState(true);
   // Define state to manage the active link
   const [activeLink, setActiveLink] = useState("Patients");
 
@@ -15,6 +17,7 @@ function UserDashboard() {
     // Update the state to show UserTable and hide FileUpload
     setShowFileUpload(false);
     setShowUserTable(true);
+    setShowTaskTable(false)
     // Update the active link
     setActiveLink("Patients");
   };
@@ -24,8 +27,18 @@ function UserDashboard() {
     // Update the state to show FileUpload and hide UserTable
     setShowFileUpload(true);
     setShowUserTable(false);
+    setShowTaskTable(false)
     // Update the active link
     setActiveLink("Upload Hotel");
+  };
+
+  const handleTaskUploadClick = () => {
+    // Update the state to show FileUpload and hide UserTable
+    setShowFileUpload(false);
+    setShowUserTable(false);
+    setShowTaskTable(true)
+    // Update the active link
+    setActiveLink("task");
   };
   // Function to handle click event for Upload Hotel
   // const handleUserClick = () => {
@@ -216,7 +229,18 @@ function UserDashboard() {
                   }`}
                   onClick={handlePatientsClick}
                 >
-                  Patients
+                  Register Patients
+                </a>
+                <a
+                  href="#"
+                  className={`px-3 border-b-2 border-transparent pb-1.5 dark:text-gray-400 ${
+                    activeLink === "task"
+                      ? "dark:border-white dark:text-white"
+                      : "no-underline"
+                  }`}
+                  onClick={handleTaskUploadClick}
+                >
+                  Create Task
                 </a>
                 <a
                   href="#"
@@ -233,6 +257,7 @@ function UserDashboard() {
             </div>
             {/* Here is the toggle */}
             {showFileUpload && <CreatePatient />}
+            {showTaskTable && <CreateTask />}
             {showUserTable && <TaskTable />}
           </div>
         </div>
