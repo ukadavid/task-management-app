@@ -52,7 +52,7 @@ Welcome to the official documentation for the MediGuard backend. This documentat
 
 ### Purpose
 
-The MediGuard backend serves as the core of the MediGuard application, providing functionalities related to user management, patient records, task management, and more. It is designed to handle user authentication, data storage, and communication with the frontend.
+The MediGuard backend serves as the core of the MediGuard application, providing functionalities related to user management, patient records, task management, and more. It is designed to handle user authentication, data storage, and communication with the frontend. I used the MVC approach for the development with the View done with React.JS.
 
 ### Architecture Overview
 

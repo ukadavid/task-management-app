@@ -59,3 +59,7 @@ The **Task Management App for Hospital Nurses** is a specialized application des
 ## Conclusion
 
 The **Task Management App for Hospital Nurses** aims to simplify and streamline medication administration tasks for nurses, ensuring accurate and timely patient care within a hospital environment. The app's user-friendly interface, authentication and authorization layers, and real-time notifications contribute to improved medication management and overall patient safety.
+
+Other documentations
+[Endpoints Documentation](./Task%20Management%20Project/Endpoints.md)
+[MediGuard Backend](./Task%20Management%20Project/Mediguard-Backend.md)
