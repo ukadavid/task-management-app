@@ -17,11 +17,11 @@ router.post("/register", createAdmin);
 router.post("/login", authenticateAdmin, loginAdmin);
 
 // User Route
-router.get("/getUsers", getAllUsers);
-router.get("/getUser/:id", getUser);
+router.get("/getUsers", authenticateAdmin, getAllUsers);
+router.get("/getUser/:id", authenticateAdmin, getUser);
 
 //patient Route
-router.get("/getPatients", getAllPatient);
+router.get("/getPatients", authenticateAdmin, getAllPatient);
 router.delete("/deletePatient/:patientId", authenticateAdmin, deletePatient);
 router.delete("/deleteUser/:id", authenticateAdmin, deleteUser);
 
