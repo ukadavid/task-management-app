@@ -100,9 +100,9 @@ yarn dev
 
 All requests to the backend APIs require authentication using JSON Web Tokens (JWT). To obtain a JWT, users need to register and get token for authentication.
 
-**Authentication Middleware:** Ensures that only authenticated users can access protected routes.
+**Authentication Middleware:** Ensures that only authenticated users and admin can access protected routes.
 
-**Authorization Middleware:** Checks if a user has the necessary permissions to perform certain actions.
+**Authorization Middleware:** Checks if a user and admin have the necessary permissions to perform certain actions for example, a user cannot delete patients from the application.
 
 ### Endpoints
 
