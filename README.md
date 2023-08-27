@@ -45,10 +45,40 @@ The **Task Management App for Hospital Nurses** is a specialized application des
 
 ## Usage
 
-1. Install dependencies using `npm install` in the project root.
-2. Configure the backend server and database settings in `config.js`.
-3. Run the backend server using `node server.js`.
-4. Run the frontend development server using `npm start`.
+1. Enter the backend and frontend folders and install the dependencies.
+2. Install dependencies using `yarn` in the project root.
+3. include a .env file for the environmental variables.
+4. The details of the .env are below.
+5. Compile the Typescript project using `yarn compile`
+6. Run the backend server using `yarn dev`.
+7. Run the frontend development server using `yarn dev`.
+
+## env Frontend
+
+```env 
+VITE_BASE_URL=http://localhost:5000
+```
+
+## env Backend
+```env 
+JWT_SECRET=megaboy
+```
+
+## Admin Account Details for Sign up
+
+```
+email - nnn@gmail.com
+password - 123456
+
+```
+
+## User Account Details for Sign up
+
+```
+email - kkk@gmail.com
+password - 1234
+
+```
 
 ## Future Enhancements
 
@@ -58,7 +88,7 @@ The **Task Management App for Hospital Nurses** is a specialized application des
 
 ## Conclusion
 
-The **Task Management App for Hospital Nurses** aims to simplify and streamline medication administration tasks for nurses, ensuring accurate and timely patient care within a hospital environment. The app's user-friendly interface, authentication and authorization layers, and real-time notifications contribute to improved medication management and overall patient safety.
+The **Task Management App for Hospital Nurses** aims to simplify and streamline medication administration tasks for nurses, ensuring accurate and timely patient care within a hospital environment. The app's user-friendly interface, authentication and authorization layers, and real-time notifications improve medication management and overall patient safety.
 
 Other documentations
 [Endpoints Documentation](./Task%20Management%20Project/Endpoints.md)
